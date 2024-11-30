@@ -1,0 +1,11 @@
+{
+  "name": "taskmaster",
+  "version": "1.0.0",
+  "description": "A task management system that allows users to create, update, and delete tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node src/test/test.js"
+  },
+  "author": "Samuel Adeyeye",
+  "license": "MIT"
+}
