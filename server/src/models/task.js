@@ -8,32 +8,37 @@ const taskSchema = new mongoose.Schema({
     },
     title: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
-    description: String,
-  priority: {
-    type: String,
-    enum: ['low', 'medium', 'high'],
-      default: 'medium',
-      required: true,
-      trim: true
+    description: {
+        type: String,
+        trim: true
+    },
+    priority: {
+        type: String,
+        enum: ['low', 'medium', 'high'],
+        default: 'medium'
     },
     deadline: {
         type: Date,
         required: true
-      },
+    },
     completed: {
         type: Boolean,
-        default: false,
-        required: false
+        default: false
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-      },
+    categories: [{
+        type: String,
+        trim: true
+    }],
+    tags: [{
+        type: String,
+        trim: true
+    }]
 }, {
     timestamps: true
-})
+});
 
 const Task = mongoose.model('Task', taskSchema);
 

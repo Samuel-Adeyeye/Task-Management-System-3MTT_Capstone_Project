@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "node src/test/test.js",
-    "start": "node server/src/index.js",
+    "start": "nodemon frontend/js/app.js",
     "dev": "nodemon server/src/index.js"
   },
   "author": "Samuel Adeyeye",
@@ -19,6 +19,7 @@
     "express-rate-limit": "^7.4.1",
     "express-validator": "^7.2.0",
     "helmet": "^8.0.0",
+    "http-server": "^14.1.1",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.11.0",
     "mongoose": "^8.8.3",

@@ -16,8 +16,12 @@ connectDB();
 
 // Security Middleware
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5501',
+    credentials: true
+}));
 app.use(json());
+app.use(express.static('public'))
 
 // Rate limiting configuration
 const limiter = rateLimit({

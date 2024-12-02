@@ -6,47 +6,40 @@ import Task from './task.js';
 
 // Schema for user
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    email: {
-        type: String,
-        required: true,
+    email: { 
+        type: String, 
+        required: true, 
         unique: true,
         trim: true,
         lowercase: true,
         validate(value) {
-            if(!validator.isEmail(value)) {
-                throw new Error('E-mail is invaild.')
+            if (!validator.isEmail(value)) {
+                throw new Error('Email is invalid')
             }
         }
     },
-    password: {
-        type: String,
+    password: { 
+        type: String, 
         required: true,
-        validate(value) {
-            if (value.toLowerCase().includes('password')) {
-                throw new Error('Password can\'t be password.');
-            }
-        },
-        minlength: 7,
+        minlength: 6,
+        trim: true
+    },
+    name: { 
+        type: String, 
+        required: false,
         trim: true
     },
     createdAt: { 
         type: Date, 
         default: Date.now 
-      },
+    },
     tokens: [{
         token: {
-            required: true,
-            type: String
+            type: String,
+            required: true
         }
     }]
-}, {
-    timestamps: true
-})
+});
 
 userSchema.virtual('tasks', {
     ref: 'Task',

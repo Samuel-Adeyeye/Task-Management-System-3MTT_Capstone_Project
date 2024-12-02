@@ -1,4 +1,3 @@
-// src/controllers/userController.js
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
@@ -13,19 +12,16 @@ export const register = async (req, res) => {
             return res.status(400).json({ error: 'Email already registered' });
         }
 
-        // Hash password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        // Create user
+        // Create user (password will be hashed by the schema middleware)
         const user = new User({
             email,
-            password: hashedPassword
+            password    // No need to hash here, schema middleware will do it
         });
 
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
+        console.error('Registration error:', error);
         res.status(500).json({ error: 'Server error' });
     }
 };
@@ -34,19 +30,10 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // Check user exists
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ error: 'Invalid credentials' });
-        }
-
-        // Verify password
-        const validPassword = await bcrypt.compare(password, user.password);
-        if (!validPassword) {
-            return res.status(400).json({ error: 'Invalid credentials' });
-        }
-
-        // Create token
+        // Use the schema's findByCredentials method
+        const user = await User.findByCredentials(email, password);
+        
+        // Generate token
         const token = jwt.sign(
             { userId: user._id, email: user.email },
             process.env.JWT_SECRET,
@@ -55,7 +42,8 @@ export const login = async (req, res) => {
 
         res.json({ token });
     } catch (error) {
-        res.status(500).json({ error: 'Server error' });
+        console.error('Login error:', error);
+        res.status(400).json({ error: 'Invalid credentials' });
     }
 };
 
