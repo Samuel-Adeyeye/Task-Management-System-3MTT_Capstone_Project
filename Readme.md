@@ -71,7 +71,7 @@
 
 2. Install backend dependencies:  
    ```bash  
-   cd backend  
+   cd server  
    npm install  
    ```  
 
@@ -89,7 +89,7 @@
 
 5. Install frontend dependencies:  
    ```bash  
-   cd ../frontend  
+   cd ../client  
    npm install  
    ```  
 
