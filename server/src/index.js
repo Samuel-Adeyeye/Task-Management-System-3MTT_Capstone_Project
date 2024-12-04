@@ -17,7 +17,7 @@ connectDB();
 // Security Middleware
 app.use(helmet());
 app.use(cors({
-    origin: 'http://localhost:5501',
+    origin: "*",
     credentials: true
 }));
 app.use(json());

@@ -2,9 +2,17 @@ import { config } from '../config/config.js';
 
 class AuthService {
     constructor() {
-        this.baseUrl = "http://localhost:3000/api";
+        this.baseUrl = config.API_URL;
+        // Check if window exists (browser environment)
+        this.storage = typeof window !== 'undefined' ? window.localStorage : {
+            getItem: () => null,
+            setItem: () => {},
+            removeItem: () => {}
+        };
+        this.token = this.storage.getItem('token');
+        // this.baseUrl = "http://localhost:3000/api";
         // this.baseUrl = config.API_URL;
-        this.token = localStorage.getItem('token');
+        // this.token = localStorage.getItem('token');
         // this.token = localStorage.getItem(config.TOKEN_KEY);
     }
 
@@ -52,4 +60,4 @@ class AuthService {
     }
 }
 
-export default new AuthService();
+export default AuthService;
