@@ -50,8 +50,8 @@
 - JavaScript  
 
 **Deployment**:  
-- Backend: [Fly.io](https://fly.io)  
-- Frontend: [Vercel](https://vercel.com) or [Netlify](https://www.netlify.com)  
+- Backend: [Render](https://taskmaster-9fau.onrender.com)  
+- Frontend: [Render.com](https://taskmaster-frontend-pj1v.onrender.com)
 
 ---
 
@@ -65,7 +65,7 @@
 ### Steps  
 1. Clone the repository:  
    ```bash  
-   git clone https://github.com/your-username/taskmaster.git  
+   git clone https://github.com/Samuel-Adeyeye/TaskMaster.git  
    cd taskmaster  
    ```  
 
@@ -89,7 +89,7 @@
 
 5. Install frontend dependencies:  
    ```bash  
-   cd ../client  
+   cd ../frontend  
    npm install  
    ```  
 
